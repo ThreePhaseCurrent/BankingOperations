@@ -1,5 +1,5 @@
 # BankingOperations
-Part of the project was done in spring practice in Sigma Software.
+A small simulation of the banking system. <br/>Part of the project was done in spring practice in Sigma Software.
 The project corrected the shortcomings and presented as a term paper.
 The application is built on the MVC pattern. Design patterns such as Mediator, Specification etc. are also used.
 How the DBMS is used by the SQL Server 2017.
