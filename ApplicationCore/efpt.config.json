@@ -1,0 +1,62 @@
+﻿{
+   "ContextClassName": "Bank_OperationsContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "DoNotCombineNamespace": false,
+   "IdReplace": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": "Entity",
+   "OutputPath": "Entity",
+   "ProjectRootNamespace": "ApplicationCore",
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[bank_account]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[client]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[credit]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[currency]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[deposit]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[exchange_rate]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[legal_person]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[operation]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[physical_person]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[sysdiagrams]"
+      }
+   ],
+   "UseDatabaseNames": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseSpatial": false
+}

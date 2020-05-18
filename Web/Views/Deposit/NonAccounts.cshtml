@@ -1,0 +1,11 @@
+﻿@model Client
+
+@{
+  ViewData["Title"] = "Внимание!";
+}
+
+<div class="text-center">
+    <h3>К сожалению, на данный момент у Вас нет доступных депозитных счетов!</h3>
+    <a class="btn btn-danger mt-5 mr-3" asp-controller="Credit" asp-action="AllCredits" asp-route-idClient="@Model.IdClient">Вернуться</a>
+    <a class="btn btn-orange mt-5" asp-controller="BankAccount" asp-action="CreateClientAccountForm" asp-route-idClient="@Model.IdClient">Создать счет</a>
+</div>

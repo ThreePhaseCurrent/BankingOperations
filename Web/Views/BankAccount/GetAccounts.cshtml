@@ -1,0 +1,76 @@
+﻿@model AccountViewModel
+@{
+    ViewData["Title"] = "Доступные счета";
+}
+
+<div class="text-center mb-5">
+    <h3>Доступные счета</h3>
+</div>
+
+    <a class="btn btn-orange mb-3" asp-controller="BankAccount" asp-action="CreateClientAccountForm"
+       asp-route-idClient="@Model.IdClient">
+        Открыть счет
+    </a>
+
+<div class="row justify-content-center">
+    @if (Model.BankAccounts.Count() == 0)
+        {
+            <div>
+                <h5>Нет существующих счетов</h5>
+            </div>
+        }
+
+    @foreach (var account in Model.BankAccounts)
+    {
+        var isOpened = account.DateClose == null;
+
+        <div class="card border-dark mb-3 mr-3">
+            <!-- Шапка (bg-primary - цвет фона, text-white - цвет текста) -->
+            <div class="card-header text-center text-white @(isOpened ? "bg-gray" : "bg-danger")">
+                <span>Счет № @account.IdAccount</span>
+            </div>
+            <div class="card-body">
+                <div class="card-text">Валюта: @account.IdCurrencyNavigation.Name</div>
+                <div class="card-text">Тип счета: @account.AccountType</div>
+                <div class="card-text">
+                    Статус:
+                    @if (isOpened)
+                    {
+                        <span class="text-success">Активный</span>
+                    }
+                    else
+                    {
+                        <span class="text-danger">Закрытый</span>
+                    }
+                </div>
+
+                Сумма:
+                <span class="badge badge-pill mb-4 bg-orange">
+                    <span>@account.Amount</span>
+                </span>
+                <div class="text-center">
+
+                    <a class="btn btn-orange " asp-controller="Operation" asp-action="Index" asp-route-id="@account.IdAccount">Просмотреть</a>
+
+                    @if (isOpened)
+                    {
+                        <a class="btn btn-danger" asp-controller="BankAccount" asp-action="BankAccountClose" asp-route-idAccount="@account.IdAccount">Закрыть</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-danger" asp-controller="BankAccount" asp-action="BankAccountDelete" asp-route-idAccount="@account.IdAccount">Удалить</a>
+                    }
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@if (Model.ModalError != null)
+{
+@await Component.InvokeAsync("Popup", new
+{
+    Model.ModalError.Title, Model.ModalError.Message
+})
+}

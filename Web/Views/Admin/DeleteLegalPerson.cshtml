@@ -1,0 +1,64 @@
+﻿@model LegalPersonViewModel
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Удаление Юридич. Лица";
+}
+
+<div class="text-center">
+    <h3>Вы уверены, что хотите удалить данного пользователя?</h3>
+</div>
+
+<hr/>
+<div class="row justify-content-center">
+        <dt class="col-sm-2">
+            Email
+        </dt>
+        <dd class="col-sm-2">
+            @Html.DisplayFor(model => model.Client.Login)
+        </dd>
+    </div>
+    <div class="row justify-content-center">
+        <dt class="col-sm-2">
+            Адрес
+        </dt>
+        <dd class="col-sm-2">
+            @Html.DisplayFor(model => model.Client.Address)
+        </dd>
+    </div>
+    <div class="row justify-content-center">
+        <dt class="col-sm-2">
+            Телефонный номер
+        </dt>
+        <dd class="col-sm-2">
+            @Html.DisplayFor(model => model.Client.TelNumber)
+        </dd>
+    </div>
+    <div class="row justify-content-center">
+        <dt class="col-sm-2">
+            Название
+        </dt>
+        <dd class="col-sm-2">
+            @Html.DisplayFor(model => model.LegalPerson.Name)
+        </dd>
+    </div>
+    <div class="row justify-content-center">
+        <dt class="col-sm-2">
+            Тип собственности
+        </dt>
+        <dd class="col-sm-2">
+            @Html.DisplayFor(model => model.LegalPerson.OwnershipType)
+        </dd>
+    </div>
+    <div class="row justify-content-center">
+        <dt class="col-sm-2">
+            ФИО Директора
+        </dt>
+        <dd class="col-sm-2">
+            @Html.DisplayFor(model => model.LegalPerson.Director)
+        </dd>
+    </div>
+<div class="text-center mt-4">
+        <a asp-action="Index" class="btn btn-secondary mr-3">Вернуться к списку</a>
+        <a class="btn btn-orange" asp-action="DeleteConfirmed" asp-route-idClient="@Model.Client.IdClient">Удалить</a>
+    </div>

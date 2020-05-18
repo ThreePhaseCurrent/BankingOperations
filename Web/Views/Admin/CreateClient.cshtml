@@ -1,0 +1,56 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Infrastructure.Identity
+@model ClientCreateViewModel
+
+@{
+    ViewData["Title"] = "Добавление нового клиента";
+}
+
+<div class="text-center">
+    <h4>Добавление новой учетной записи</h4>
+</div>
+<hr/>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form asp-action="CreateClient">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Client.Login" class="control-label">Email</label>
+                <input asp-for="Client.Login" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label">Пароль</label>
+                <input asp-for="Password" class="form-control" type="password"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="PasswordConfirm" class="control-label">Подтверждение пароля</label>
+                <input asp-for="PasswordConfirm" class="form-control" type="password"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Client.Address" class="control-label">Адрес</label>
+                <input asp-for="Client.Address" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Client.TelNumber" class="control-label">Телефонный номер</label>
+                <input asp-for="Client.TelNumber" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsPhysicalPerson" class="control-label"></label>
+                <select asp-for="IsPhysicalPerson" class="form-control">
+                    <option value="true">Физическое Лицо</option>
+                    <option value="false">Юридическое Лицо</option>
+                </select>
+            </div>
+            <div class="form-group text-center">
+                <input type="submit" value="Далее" class="btn btn-orange"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (User.IsInRole(AuthorizationConstants.Roles.ADMINISTRATOR))
+{
+    <div>
+        <a asp-action="Index" class="btn btn-secondary">Вернуться к списку</a>
+    </div>
+}

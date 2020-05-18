@@ -1,0 +1,48 @@
+﻿.card {
+    border-radius: 30px;
+    height: 300px;
+    width: 370px;
+}
+
+.card .card-header {
+    border-radius: 30px;
+    height: 100px;
+}
+
+.card .card-img-top {
+    height: 50px;
+    margin-left: 42%;
+    width: 50px;
+}
+
+.text-centre {
+    margin-bottom: auto;
+    margin-top: auto;
+}
+
+.img-fluid {
+    height: 50px;
+    width: 50px;
+}
+
+.fixed-table-header {
+    height: 120px;
+    padding-top: 30px;
+}
+
+.text { padding-top: 10%; }
+
+.my-img {
+    height: 300px;
+    width: auto;
+}
+
+.carousel-control-prev {
+    height: auto;
+    width: auto;
+}
+
+.carousel-control-next {
+    height: auto;
+    width: auto;
+}

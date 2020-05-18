@@ -1,0 +1,54 @@
+﻿@model AllCreditClientViewModel
+
+@{
+  ViewData["Title"] = "Список кредитов";
+}
+
+<div class="text-center mb-5">
+    <h3>Активные кредиты</h3>
+</div>
+
+@if(User.IsInRole("Client"))
+{
+  <a class="btn btn-orange mb-3" asp-controller="Credit" asp-action="TakeCreditForm"
+     asp-route-idClient="@Model.IdClient">
+      Оформить кредит
+  </a>
+}
+
+<div class="row justify-content-center">
+    
+    @if (Model.Credits.Count() == 0)
+    {
+        <div>
+            <h5>Нет активных кредитов</h5>
+        </div>
+    }
+    
+    @foreach (var credit in Model.Credits)
+    {
+        <div class="card border-dark mb-3 mr-3">
+            <!-- Шапка (bg-primary - цвет фона, text-white - цвет текста) -->
+            <div class="card-header text-center text-white bg-gray">
+                <span>Счет № @credit.IdAccountNavigation.IdAccount</span>
+            </div>
+            <div class="card-body">
+                <div class="card-text">Валюта: @credit.IdAccountNavigation.IdCurrencyNavigation.Name</div>
+                <div class="card-text">Текущий процент: @credit.PercentCredit %</div>
+                <div class="card-text">
+                    Статус: <span class="text-success">Активный</span>
+                </div>
+                <div class="card-text">Дата окончания: @credit.DateCreditFinish.ToShortDateString()</div>
+                Сумма:
+                <span class="badge badge-pill mb-4 bg-success">
+                    <span>@credit.Amount</span>
+                </span>
+                <div class="text-center">
+
+                    <a class="btn btn-orange" asp-controller="Operation" asp-action="Index" asp-route-id="@credit.IdAccount">Просмотреть</a>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>

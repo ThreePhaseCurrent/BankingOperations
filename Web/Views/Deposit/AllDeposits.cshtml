@@ -1,0 +1,53 @@
+﻿@model AllDepositsClientViewModel
+
+@{
+    ViewData["Title"] = "Список депозитов";
+}
+
+<div class="text-center mb-5">
+    <h3>Активные депозиты</h3>
+</div>
+
+@if (User.IsInRole("Client"))
+{
+    <a class="btn btn-orange mb-3" asp-controller="Deposit" asp-action="MakeDeposit"
+       asp-route-idClient="@Model.IdClient">
+        Оформить депозит
+    </a>
+}
+
+<div class="row justify-content-center">
+    @if (Model.Deposits.Count() == 0)
+    {
+        <div>
+            <h5>Нет активных депозитов</h5>
+        </div>
+    }
+
+    @foreach (var deposit in Model.Deposits)
+    {
+        <div class="card border-dark mb-3 mr-3">
+            <!-- Шапка (bg-primary - цвет фона, text-white - цвет текста) -->
+            <div class="card-header text-center text-white bg-gray">
+                <span>Счет № @deposit.IdAccountNavigation.IdAccount</span>
+            </div>
+            <div class="card-body">
+                <div class="card-text">Валюта: @deposit.IdAccountNavigation.IdCurrencyNavigation.Name</div>
+                <div class="card-text">Текущий процент: @deposit.PercentDeposit%</div>
+                <div class="card-text">
+                    Статус: <span class="text-success">Активный</span>
+                </div>
+                <div class="card-text">Дата окончания: @deposit.DateDepositFinish.ToShortDateString()</div>
+                Сумма:
+                <span class="badge badge-pill mb-4 bg-success">
+                    <span>@deposit.Amount</span>
+                </span>
+                <div class="text-center">
+
+                    <a class="btn btn-orange" asp-controller="Operation" asp-action="Index" asp-route-id="@deposit.IdAccount">Просмотреть</a>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>

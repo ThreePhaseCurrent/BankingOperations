@@ -1,0 +1,11 @@
+﻿.bg-gray {
+    background: #6A7782;
+}
+
+.bg-orange {
+    background: #ffa500;
+}
+
+.border-orange{
+    border-color: #ffa500 !important;
+}

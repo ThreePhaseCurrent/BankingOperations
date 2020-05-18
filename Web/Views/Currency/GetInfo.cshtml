@@ -1,0 +1,72 @@
+﻿@model IEnumerable<CurrencyViewModel>
+
+@{
+    ViewData["Title"] = "Курс валют";
+}
+
+<div class="text-center mb-4">
+    <h1>Курс валют</h1>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="table-responsive text-center">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>
+                        Валюта
+                    </th>
+                    <th>
+                        Покупка
+                    </th>
+                    <th>
+                        Продажа
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td hidden>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BuyRate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SaleRate)
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5 justify-content-center">
+    <div class="column mr-2">
+        <a href="#">
+            <img src="~/images/icons_dolar.png" alt="Snow" style="width:100%">
+        </a>
+    </div>
+    <div class="column mr-2">
+        <a href="#">
+            <img src="~/images/icon_euro.png" alt="Forest" style="width:100%">
+        </a>
+    </div>
+    <div class="column mr-2">
+        <a href="#">
+            <img src="~/images/icons_grn.png" alt="Mountains" style="width:100%">
+        </a>
+    </div>
+    <div class="column">
+            <a href="#">
+                <img src="~/images/icon_rub.png" alt="Mountains" style="width:100%">
+            </a>
+        </div>
+</div>

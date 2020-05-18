@@ -1,0 +1,65 @@
+﻿@model LegalPersonViewModel
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Подробнее о пользователе";
+}
+
+<div class="text-center">
+    <h3>Информация о пользователе</h3>
+    <h4>Юридическое лицо</h4>
+</div>
+
+<hr/>
+
+<div class="row justify-content-center">
+    <dt class="col-sm-2">
+        Email
+    </dt>
+    <dd class="col-sm-2">
+        @Html.DisplayFor(model => model.Client.Login)
+    </dd>
+</div>
+<div class="row justify-content-center">
+    <dt class="col-sm-2">
+        Адрес
+    </dt>
+    <dd class="col-sm-2">
+        @Html.DisplayFor(model => model.Client.Address)
+    </dd>
+</div>
+<div class="row justify-content-center">
+    <dt class="col-sm-2">
+        Телефонный номер
+    </dt>
+    <dd class="col-sm-2">
+        @Html.DisplayFor(model => model.Client.TelNumber)
+    </dd>
+</div>
+<div class="row justify-content-center">
+    <dt class="col-sm-2">
+        Название
+    </dt>
+    <dd class="col-sm-2">
+        @Html.DisplayFor(model => model.LegalPerson.Name)
+    </dd>
+</div>
+<div class="row justify-content-center">
+    <dt class="col-sm-2">
+        Тип собственности
+    </dt>
+    <dd class="col-sm-2">
+        @Html.DisplayFor(model => model.LegalPerson.OwnershipType)
+    </dd>
+</div>
+<div class="row justify-content-center">
+    <dt class="col-sm-2">
+        ФИО Директора
+    </dt>
+    <dd class="col-sm-2">
+        @Html.DisplayFor(model => model.LegalPerson.Director)
+    </dd>
+</div>
+<div class="text-center mt-4">
+    <a asp-action="Index" class="btn btn-secondary">Вернуться к списку</a>
+</div>

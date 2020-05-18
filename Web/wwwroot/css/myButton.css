@@ -1,0 +1,10 @@
+﻿.btn-orange {
+    background: #ffa500;
+    color: white;
+}
+
+.btn-orange:hover {
+    background: #E39400;
+    color: white
+}
+

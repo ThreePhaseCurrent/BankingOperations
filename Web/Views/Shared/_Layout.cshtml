@@ -1,0 +1,146 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Infrastructure.Identity
+@inject SignInManager<IdentityUser> SignInManager
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Web</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    
+    <link rel="stylesheet" href="~/css/myBackground.css"/>
+    <link rel="stylesheet" href="~/css/myButton.css"/>
+    <link rel="stylesheet" href="~/css/TakeCredit.css"/>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <style>
+        header .mylist a {
+        	position: relative;
+        	cursor: pointer;
+        	line-height: 1; /*задаём высоту строки*/
+        	text-decoration: none; /*убираем подчёркивание*/
+        }
+        
+        header .mylist a:after {
+        	display: block;
+        	position: absolute;
+        	left: 0; /*изменить на right:0;, чтобы изменить направление подчёркивания */
+        	width: 0;/*задаём длинну линии до наведения курсора*/
+        	height: 2px; /*задаём ширину линии*/
+        	background-color: #ffa500; /*задаём цвет линии*/
+        	content: "";
+        	transition: width 0.3s ease-out; /*задаём время анимации*/
+        	bottom: -4px;
+        }
+        
+        header .mylist a.current:after{
+            width: 100%;
+        }
+        
+        header .mylist a.current,
+        header a:hover{
+            color: #ffa500 !important;
+        }
+        
+        header .mylist a:visited{
+            color:#ffa500;
+        }
+        
+        header .mylist a:hover:after,
+        header .mylist a:focus:after {
+        	width: 100%; /*устанавливаем значение 100% чтобы ссылка подчёркивалась полностью*/
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Bank Lite</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_LoginPartial" />
+                    <ul class="navbar-nav flex-grow-1 mylist">
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole(AuthorizationConstants.Roles.CLIENT))
+                        {
+                            <li class="nav-item">
+                                <a id="nav1" class="nav-link text-white" asp-area="" asp-controller="BankAccount" asp-action="GetAccounts">Мои счета</a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="nav2" class="nav-link text-white" asp-area="" asp-controller="Credit" asp-action="AllCredits">Кредиты</a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="nav3" class="nav-link text-white" asp-area="" asp-controller="Deposit" asp-action="AllDeposits">Депозиты</a>
+                            </li>
+                        }
+                        
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole(AuthorizationConstants.Roles.ADMINISTRATOR))
+                        {
+                            <li class="nav-item">
+                                <a id="nav4" class="nav-link text-white" asp-area="" asp-controller="Admin" asp-action="Index">Клиенты</a>
+                            </li>
+                        }
+                        
+                        <li class="nav-item">
+                            <a id="nav5" class="nav-link text-white" asp-area="" asp-controller="Currency" asp-action="GetInfo">Курс валют</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+<footer class="border-top footer bg-dark">
+    <div class="container text-white-50 text-center">
+        &copy; 2020 - Bank Lite - Larchenko A.D.
+    </div>
+</footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-verуsion="true"></script>
+
+    <!--tab switching-->
+            <script>
+                document.addEventListener('DOMContentLoaded',
+                    function (e) {
+                        'use strict';
+                        var list = document.querySelectorAll('header .mylist a');
+                        list = Array.prototype.slice.call(list, 0); // convert nodeList to Array
+                        list.forEach(function (el, i, ar) {
+                            el.addEventListener('click',
+                                function (event) {
+                                    e.preventDefault();
+    
+                                    //add class "current"
+                                    el.classList.add('current');
+                                    //save id selected element
+                                    localStorage.setItem('selectNav', el.id);
+                                });
+                        });
+                    });
+    
+                //install selected element
+                if (localStorage.getItem('selectNav') != null) {
+                    document.querySelectorAll('header .mylist .current').forEach(n => n.classList.remove('current'));
+                    document.getElementById(localStorage.getItem('selectNav')).classList.add('current');
+    
+                    //clear local storage
+                    localStorage.removeItem('selectNav');
+                }
+            </script>
+
+@RenderSection("Scripts", required: false)
+</body>
+</html>

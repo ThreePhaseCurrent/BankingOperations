@@ -1,0 +1,145 @@
+﻿@model AccountOperationViewModel
+
+@{
+    ViewData["Title"] = "Выписка по счёту";
+}
+
+
+<div class="row">
+    <div class="col-md-3">
+
+        <input asp-for="@Model.Amount" hidden id="filterAmount">
+        <input asp-for="@Model.CanChangeCurrency" hidden id="filterChange">
+        <input asp-for="@Model.IsClosed" hidden id="filterClosed">
+
+        <form asp-controller="Operation" asp-action="Index" method="get">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="StartPeriod" class="col-form-label"></label>
+                <input asp-for="StartPeriod" class="form-control"/>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="EndPeriod" class="control-label"></label>
+                <input asp-for="EndPeriod" type="date" class="form-control "/>
+            </div>
+
+            <input type="submit" value="Применить" class="form-control btn-orange"/>
+        </form>
+        @if (User.IsInRole("Client"))
+        {
+            <div class="mt-2 text-center" id="transferAmountBlock">
+                <a class="form-control btn btn-orange" asp-area="" asp-controller="Operation" asp-action="Transfer"
+                   asp-route-id="@Model.IdAccount">
+                    Перевод средств
+                </a>
+            </div>
+
+            <div class="mt-2 text-center" id="changeCurrencyBlock">
+                @if (Model.CanChangeCurrency)
+                {
+                    <a class="form-control btn btn-orange" asp-area="" asp-controller="Currency" asp-action="Edit"
+                       asp-route-id="@Model.IdAccount">
+                        Изменить валюту счёта
+                    </a>
+                }
+                else
+                {
+                    <a class="form-control btn btn-orange disabled" asp-area="" asp-controller="Currency" asp-action="Edit"
+                       asp-route-id="@Model.IdAccount">
+                        Изменить валюту счёта
+                    </a>
+                }
+            </div>
+        }
+
+        @if (Model.IsClosed)
+        {
+            <div class="mt-2 text-center" id="filterClosedBlock">
+                <a asp-action="ActivateAccount" asp-area="" asp-controller="Operation" asp-route-id="@Model.IdAccount" class="form-control btn btn-orange">Активировать аккаунт</a>
+            </div>
+        }
+
+
+    </div>
+
+
+    <div class="col-md-8">
+        <div class="table-responsive text-center table">
+            <table class="table  table-bordered ">
+                <thead>
+                <tr>
+                    <th>
+                        Время проведения операции
+                    </th>
+                    <th>
+                        Тип
+                    </th>
+                    <th>
+                        Сумма
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+
+                @foreach (var item in Model.Operations)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OperationTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TypeOperation)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+@section Scripts
+{
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    @*<script type="text/javascript">
+        $(document).ready(function() {
+            let filterAmount = $('#filterAmount');
+            let amount = parseInt(filterAmount.attr('value'));
+            console.log(amount)
+            if (amount <= 0) {
+                $('#transferAmountBlock').addClass('invisible').removeClass('visible');
+            } else {
+                $('#transferAmountBlock').addClass('visible').removeClass('invisible');
+            }
+
+            let filterChange = $('#filterChange');
+            let changeble = filterChange.attr('value')
+
+            if (changeble) {
+                $('#changeCurrencyBlock').addClass('visible').removeClass('invisible');
+            } else {
+                $('#changeCurrencyBlock').addClass('invisible').removeClass('visible');
+            }
+
+            let filterClosed = $('#filterClosed');
+            let closed = filterClosed.attr('value');
+
+            if (closed) {
+                $('filterClosedBlock').addClass('visible').removeClass('invisible');
+            } else {
+                $('filterClosedBlock').addClass('invisible').removeClass('visible');
+            }
+
+        });
+    </script>*@
+}

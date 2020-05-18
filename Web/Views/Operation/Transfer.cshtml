@@ -1,0 +1,66 @@
+﻿@model TransferViewModel
+
+
+<div class="text-center mb-4">
+    <h3>Перевод средств</h3>
+</div>
+
+<div class="row justify-content-center">
+    <form method="post" asp-action="Transfer" id="transferFormId">
+        <input hidden asp-for="IdFrom"/>
+        <div asp-validation-summary="ModelOnly" class="validation"></div>
+
+        <div class="form-group form-row">
+            <label for="formGroupExampleInput" class="col-form-label">Номер карты отправителя</label>
+            <input class="form-control" value="@Model.IdFrom" readonly="readonly"/>
+        </div>
+
+
+        <div class="form-group form-row">
+            <label for="formGroupExampleInput2">Номер карты получателя</label>
+            <input type="text" class="form-control" id="cardNumber" placeholder="Another input"
+                   asp-for="IdTo">
+            <span asp-validation-for="IdTo" class="text-danger"></span>
+        </div>
+
+        <div class="form-group form-row">
+            <label for="formGroupExampleInput2">Сумма</label>
+            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input"
+                   asp-for="Amount">
+            <span asp-validation-for="Amount" class="text-danger"></span>
+        </div>
+        <div class="col-md-auto text-center">
+            <input type="submit" class="btn btn-orange" id="btn-sub">
+        </div>
+    </form>
+</div>
+
+<div aria-live="polite" aria-atomic="true" style="position: absolute; min-height: 200px; top: 70px; right: 20px;">
+  <div class="toast" data-delay="7000">
+    <div class="toast-header">
+      <img src="~/images/icon_toast.png" class="rounded mr-2" alt="...">
+      <strong class="mr-auto">Уведомление</strong>
+      <small>сейчас</small>
+      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="toast-body text-center">
+        Не хватает средств? Оформи кредит!
+        <a class="btn btn-orange mt-2" asp-controller="Credit" asp-action="TakeCreditForm">Оформить</a>
+    </div>
+  </div>
+</div>
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    
+    <script type="text/javascript" src="~/js/TransferValidation.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+@section Scripts{
+
+    
+}
