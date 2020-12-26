@@ -125,6 +125,15 @@ namespace Web
                 endpoints.MapRazorPages();
             });
 
+            //using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            //{
+            //    var context = serviceScope.ServiceProvider.GetRequiredService<BankOperationsIdentityContext>();
+            //    context.Database.EnsureCreated();
+
+            //    var context1 = serviceScope.ServiceProvider.GetRequiredService<BankOperationsContext>();
+            //    context1.Database.EnsureCreated();
+            //}
+
             //IdentityDataSeed.RolesSeed(app.ApplicationServices.GetRequiredService<RoleManager<IdentityRole>>());
         }
     }
