@@ -44,33 +44,33 @@ namespace ControllersUnitTests
             return clients;
         }
         
-        [Fact]
-        public async Task Index_Get_GetClients()
-        {
-            // Arrange
-            var mockUserManager = new Mock<UserManager<IdentityUser>>();
-            var mockLegalPerson    = new Mock<IAsyncRepository<LegalPerson>>();
-            var mockPhysicalPerson = new Mock<IAsyncRepository<PhysicalPerson>>();
-            var mockMediator       = new Mock<IMediator>();
+        //[Fact]
+        //public async Task Index_Get_GetClients()
+        //{
+        //    // Arrange
+        //    var mockUserManager = new Mock<UserManager<IdentityUser>>();
+        //    var mockLegalPerson    = new Mock<IAsyncRepository<LegalPerson>>();
+        //    var mockPhysicalPerson = new Mock<IAsyncRepository<PhysicalPerson>>();
+        //    var mockMediator       = new Mock<IMediator>();
 
-            var mockClient = new Mock<IAsyncRepository<Client>>();
-            mockClient.Setup(m => m.GetAll()).ReturnsAsync(GetFakeClients());
+        //    var mockClient = new Mock<IAsyncRepository<Client>>();
+        //    mockClient.Setup(m => m.GetAll()).ReturnsAsync(GetFakeClients());
             
             
-            mockUserManager.Setup(x=>x.FindByIdAsync(It.IsAny<string>()))
-                .Returns(() => null);
+        //    mockUserManager.Setup(x=>x.FindByIdAsync(It.IsAny<string>()))
+        //        .Returns(() => null);
 
-            var controller = new AdminController(mockClient.Object, mockMediator.Object, mockUserManager.Object, 
-                mockPhysicalPerson.Object, mockLegalPerson.Object);
+        //    var controller = new AdminController(mockClient.Object, mockMediator.Object, mockUserManager.Object, 
+        //        mockPhysicalPerson.Object, mockLegalPerson.Object);
 
-            // // Act
-            // var result = controller.Index();
-            //
-            // // Assert
-            // var viewResult = Assert.IsType<ViewResult>(result);
-            // var model      = Assert.IsAssignableFrom<IEnumerable<Client>>(viewResult.Model);
-            // Assert.Equal(GetFakeClients().Count, model.Count());
-        }
+        //    // Act
+        //    var result = controller.Index();
+
+        //    // Assert
+        //    var viewResult = Assert.IsType<ViewResult>(result);
+        //    var model = Assert.IsAssignableFrom<IEnumerable<Client>>(viewResult.Model);
+        //    Assert.Equal(GetFakeClients().Count, model.Count());
+        //}
         
         
     }
